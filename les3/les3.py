@@ -1,2 +1,2 @@
-def test1_les3_2():
+def test1_les3_new():
     pass
