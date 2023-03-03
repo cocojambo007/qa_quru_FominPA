@@ -16,8 +16,7 @@ def test_les5(browser_setup):
     browser.element(by.id('subjectsInput')).should(be.blank).type('Maths').press_enter()  # поле subject
     browser.element('div[class="custom-control custom-checkbox custom-control-inline"] label[for="hobbies-checkbox-1"]') \
         .click()  # выбор хобби
-    browser.element(by.id('uploadPicture')).send_keys(
-        'C:/Users/FominPA/Pictures/Saved Pictures/Screenshot_1.jpg')  # загрузка файла
+    browser.element(by.id('uploadPicture')).send_keys('C:/Users/FominPA/PycharmProjects/qa_quru_FominPA/les5/resources/Screenshot_1.jpg')  # загрузка файла
     browser.element(by.id('currentAddress')).should(be.blank).type('Current Address').click()  # поле адреса
     browser.element(by.id('react-select-3-input')).type('Uttar Pradesh').press_enter()  # выбор state
     browser.element(by.id('react-select-4-input')).type('Agra').press_enter()  # выбор city
