@@ -1,0 +1,21 @@
+from selene import browser, be, have, by
+
+browser.open('https://demoqa.com/automation-practice-form')
+browser.element(by.id('firstName')).should(be.blank).type('Павел')
+browser.element(by.id('lastName')).should(be.blank).type('Фомин')
+browser.element(by.id('userEmail')).should(be.blank).type('test@test.ru')
+browser.element('div[class*="custom-control"] label[for="gender-radio-1"]').click()
+browser.element(by.id('userNumber')).should(be.blank).type('88005553535')
+browser.element(by.id('dateOfBirthInput')).click()
+browser.element('select[class="react-datepicker__month-select"] option[value="6"]').click()
+browser.element('select[class="react-datepicker__year-select"] option[value="1993"]').click()
+browser.element('div[class="react-datepicker__day react-datepicker__day--005"]').click()
+browser.element(by.id('subjectsInput')).should(be.blank).type('Maths').press_enter()
+browser.element('div[class="custom-control custom-checkbox custom-control-inline"] label[for="hobbies-checkbox-1"]') \
+    .click()
+browser.element(by.id('uploadPicture')).send_keys('C:/Users/FominPA/Pictures/Saved Pictures/Screenshot_1.jpg')
+browser.element(by.id('currentAddress')).should(be.blank).type('Current Address').click()
+browser.element(by.id('react-select-3-input')).type('Uttar Pradesh').press_enter()
+browser.element(by.id('react-select-4-input')).type('Agra').press_enter()
+browser.element(by.id('submit')).click()
+browser.element(by.id('example-modal-sizes-title-lg')).should(have.text('Thanks for submitting the form'))
