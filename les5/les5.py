@@ -1,35 +1,42 @@
 from selene import browser, be, have, by
 import os
 
-FIRSTNAME = 'Павел'
-LASTNAME = 'Фомин'
-EMAIL = 'test@test.ru'
-MOBILE = '8800555353'
-FILE = 'Screenshot_1.jpg'
-ADDRESS = 'Current Address'
-STATE = 'Uttar Pradesh'
-CITY = 'Agra'
-
 
 def test_les5(browser_setup):
+    FIRSTNAME = 'Павел'
+    LASTNAME = 'Фомин'
+    EMAIL = 'test@test.ru'
+    MOBILE = '8800555353'
+    FILE = 'Screenshot_1.jpg'
+    ADDRESS = 'Current Address'
+    STATE = 'Uttar Pradesh'
+    CITY = 'Agra'
+
+    browser.open('https://demoqa.com/automation-practice-form')
     browser.element(by.id('firstName')).should(be.blank).type(FIRSTNAME)  # поле first name
     browser.element(by.id('lastName')).should(be.blank).type(LASTNAME)  # поле last name
     browser.element(by.id('userEmail')).should(be.blank).type(EMAIL)  # поле email
     browser.element('div[class*="custom-control"] label[for="gender-radio-1"]').click()  # выбор gender
-    browser.element(by.id('userNumber')).should(be.blank).type(MOBILE)  # поле телефон
-    browser.element(by.id('dateOfBirthInput')).click()  # выбор поля день рождения
-    browser.element('select[class="react-datepicker__month-select"] option[value="6"]').click()  # выбор месяца
-    browser.element('select[class="react-datepicker__year-select"] option[value="1993"]').click()  # выбор года
-    browser.element('div[class="react-datepicker__day react-datepicker__day--005"]').click()  # выбор даты
+    browser.element(by.id('userNumber')).should(be.blank).type(MOBILE)  # поле Mobile
+    browser.element(by.id('dateOfBirthInput')).click()  # выбор поля Date of Birth
+    browser.element(
+        'select[class="react-datepicker__month-select"] option[value="6"]').click()  # выбор из выпадающего списка month
+    browser.element(
+        'select[class="react-datepicker__year-select"] option[value="1993"]').click()  # выбор из выпадающего списка year
+    browser.element(
+        'div[class="react-datepicker__day react-datepicker__day--005"]').click()  # выбор из выпадающего списка date
     browser.element(by.id('subjectsInput')).should(be.blank).type('Maths').press_enter()  # поле subject
     browser.element('div[class="custom-control custom-checkbox custom-control-inline"] label[for="hobbies-checkbox-1"]') \
-        .click()  # выбор хобби
-    browser.element(by.id('uploadPicture')).send_keys(os.getcwd() + f'/resources/{FILE}')  # загрузка файла
-    browser.element(by.id('currentAddress')).should(be.blank).type(ADDRESS).click()  # поле адреса
+        .click()  # выбор Hobbies
+    browser.element(by.id('uploadPicture')).send_keys(os.getcwd() + f'/resources/{FILE}')  # загрузка Picture
+    browser.element(by.id('currentAddress')).should(be.blank).type(ADDRESS).click()  # поле Current Address
     browser.element(by.id('react-select-3-input')).type(STATE).press_enter()  # выбор state
     browser.element(by.id('react-select-4-input')).type(CITY).press_enter()  # выбор city
+    browser.execute_script('document.querySelector("footer").remove()')  # удаление видимого баннера
+    browser.execute_script("document.querySelector('#close-fixedban').remove()")  # удаление невидимого баннера
     browser.element(by.id('submit')).click()  # нажатие кнопки submit
-    '''Проверки полей на валидность'''
+
+    # Проверки полей на валидность
     browser.element(by.id('example-modal-sizes-title-lg')).should(
         have.text('Thanks for submitting the form'))  # проверка всплывающего окна
     browser.element('tr:nth-child(1) td:nth-child(2)').should(
