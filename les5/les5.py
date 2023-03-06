@@ -13,6 +13,8 @@ def test_les5(browser_setup):
     CITY = 'Agra'
 
     browser.open('https://demoqa.com/automation-practice-form')
+    browser.execute_script('document.querySelector("footer").remove()')  # удаление видимого баннера
+    browser.execute_script("document.querySelector('#close-fixedban').remove()")  # удаление невидимого баннера
     browser.element(by.id('firstName')).should(be.blank).type(FIRSTNAME)  # поле first name
     browser.element(by.id('lastName')).should(be.blank).type(LASTNAME)  # поле last name
     browser.element(by.id('userEmail')).should(be.blank).type(EMAIL)  # поле email
@@ -32,8 +34,7 @@ def test_les5(browser_setup):
     browser.element(by.id('currentAddress')).should(be.blank).type(ADDRESS).click()  # поле Current Address
     browser.element(by.id('react-select-3-input')).type(STATE).press_enter()  # выбор state
     browser.element(by.id('react-select-4-input')).type(CITY).press_enter()  # выбор city
-    browser.execute_script('document.querySelector("footer").remove()')  # удаление видимого баннера
-    browser.execute_script("document.querySelector('#close-fixedban').remove()")  # удаление невидимого баннера
+
     browser.element(by.id('submit')).click()  # нажатие кнопки submit
 
     # Проверки полей на валидность
@@ -52,3 +53,4 @@ def test_les5(browser_setup):
     browser.element('tr:nth-child(10) td:nth-child(2)').should(
         have.text(f'{STATE} {CITY}'))  # проверка поля State and City
     browser.element(by.id('closeLargeModal')).click()  # нажатие кнопки close
+    print(browser.config.window_width, ' ', browser.config.window_height)
