@@ -19,7 +19,7 @@ def test_dark_theme():
     # TODO переключите темную тему в зависимости от времени суток,
     #  но учтите что темная тема может быть включена вручную
     is_dark_theme = None
-    if current_time >= time(22) or current_time < time(6) or dark_theme_enabled == True:
+    if time(22) <= current_time or current_time <= time(6) or dark_theme_enabled == True:
         is_dark_theme = True
     else:
         is_dark_theme = False
@@ -65,18 +65,22 @@ def test_find_suitable_user():
 def rename_function(func_name, *args):
     return f'{func_name.__name__.replace("_", " ").title()} [{", ".join(args)}]'
 
+
 def test_readable_function():
     open_browser(browser_name="Chrome")
     go_to_companyname_homepage(page_url="https://companyname.com")
     find_registration_button_on_login_page(page_url="https://companyname.com/login", button_text="Register")
 
+
 def open_browser(browser_name):
     actual_result = rename_function(open_browser, browser_name)
     assert actual_result == "Open Browser [Chrome]"
 
+
 def go_to_companyname_homepage(page_url):
     actual_result = rename_function(go_to_companyname_homepage, page_url)
     assert actual_result == "Go To Companyname Homepage [https://companyname.com]"
+
 
 def find_registration_button_on_login_page(page_url, button_text):
     actual_result = rename_function(find_registration_button_on_login_page, page_url, button_text)
